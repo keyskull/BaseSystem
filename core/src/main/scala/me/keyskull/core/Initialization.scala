@@ -8,6 +8,6 @@ abstract class Initialization(programName:String,version:String) {
   def main(args: Array[String]): Unit = {
     new me.keyskull.util.Location{
       override def Init() = {null}
-    }.getLocation()
+    }.get
   }
 }
