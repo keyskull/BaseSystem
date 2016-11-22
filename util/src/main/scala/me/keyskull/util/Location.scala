@@ -11,9 +11,7 @@ import scala.util.{Failure, Success, Try}
   * Created by Jane on 2016/11/21.
   */
 trait Location {
-
   case class LocationInformation(accuracy: Double, longitude: Double, latitude: Double)
-
   private val url = new URL("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAYteeSoy0p7LwBeBlpPVbzCiHDU8BwRMg")
   private val httpsConnection = url.openConnection().asInstanceOf[HttpsURLConnection]
   httpsConnection.setRequestMethod("POST")

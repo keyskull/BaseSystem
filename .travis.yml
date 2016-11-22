@@ -1,10 +1,13 @@
 language: scala
 
+
 services:
   - docker
 
 env:
   DOCKER_COMPOSE_VERSION: 1.9.0-rc4
+  CODACY_PROJECT_TOKEN: %1708aff745054f258eb4917cf2191051%
+
 
 before_install:
   - docker build -t keyskull/postssystem .
@@ -12,6 +15,7 @@ before_install:
 
 
 script:
+  - sbt clean coverage test coverageReport &&
+    sbt coverageAggregate
   - sbt ++$TRAVIS_SCALA_VERSION test
-
 

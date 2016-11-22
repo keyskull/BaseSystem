@@ -25,3 +25,4 @@ lazy val root = (project in file(".")) settings(commonSettings: _*)
 lazy val mining = project in file("mining") dependsOn(core) settings(commonSettings: _*)
 lazy val client = (project in file("client") dependsOn(core,mining)).settings(commonSettings: _*)
 lazy val server = (project in file("server") dependsOn(core,mining)).settings(commonSettings: _*)
+
