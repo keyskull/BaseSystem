@@ -1,0 +1,17 @@
+language: scala
+
+services:
+  - docker
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.9.0-rc4
+
+before_install:
+  - docker build -t keyskull/postssystem .
+  - docker run -d -P 41658:41658  keyskull/postssystem -s
+
+
+script:
+  - sbt ++$TRAVIS_SCALA_VERSION test
+
+
