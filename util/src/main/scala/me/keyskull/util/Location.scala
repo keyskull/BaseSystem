@@ -30,8 +30,7 @@ trait Location {
   def Init: LocationInformation
 
   def get(): LocationInformation = {
-    val info = Try(
-      if (httpsConnection.getResponseCode == HttpURLConnection.HTTP_OK)
+    val info:LocationInformation = Try(
         LocationInformation(jsonObject.getDouble("accuracy"),
           jsonObject.getJSONObject("location").getDouble("lng"),
           jsonObject.getJSONObject("location").getDouble("lat"))
