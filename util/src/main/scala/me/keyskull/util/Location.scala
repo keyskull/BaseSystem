@@ -5,6 +5,8 @@ import javax.net.ssl.HttpsURLConnection
 
 import org.json.{JSONObject, JSONTokener}
 
+import scala.util.Try
+
 /**
   * Created by Jane on 2016/11/21.
   */
@@ -27,17 +29,14 @@ trait Location {
 
   def Init: LocationInformation
 
-  def getLocation(): LocationInformation = {
-    val info = try {
-      if (httpsConnection.getResponseCode == HttpURLConnection.HTTP_OK) {
+  def get(): LocationInformation = {
+    val info = Try(
+      if (httpsConnection.getResponseCode == HttpURLConnection.HTTP_OK)
         LocationInformation(jsonObject.getDouble("accuracy"),
           jsonObject.getJSONObject("location").getDouble("lng"),
           jsonObject.getJSONObject("location").getDouble("lat"))
-      } else LocationInformation(0, 0, 0)
-    }
-    catch {
-      case _ => LocationInformation(0, 0, 0)
-    }
+    ).map(e => e).getOrElse(LocationInformation(0, 0, 0))
+
     val data = try {
       Init
     } catch {
